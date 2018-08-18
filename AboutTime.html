@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About Date</title>
+    <style>
+        div {
+            /* width: 400px; */
+            height: 100px;
+            margin: 10px auto;
+            border: 1px solid gray;
+            color: black;
+            font-size: 20px;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+            /* background-color: aqua; */
+        }
+
+        .box {
+            position: relative;
+            /* ②Flex布局              */
+            display: -webkit-flex;
+            display: flex;
+
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-justify-content: center;
+            -o-justify-content: center;
+            justify-content: center;
+
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -o-align-items: center;
+            align-items: center;
+
+
+        }
+
+         /* #one { */
+            /* ①绝对定位 + transform */
+            /* 
+            position:absolute;
+            top:50%;left:50%;
+            transform: translate(-50%,-50%);
+        */
+        /* }  */
+    </style>
+</head>
+
+<body>
+    <h1>当前时间：</h1>
+    <div class="box ">
+        <p id="showTime"></p>
+    </div>
+    <h1>2020年高考倒计时：</h1>
+    <div class="box ">
+        <p id="deadLine"></p>
+    </div>
+    <h1>限时抢购：</h1>
+    <div class="box ">
+        <p id="limitedTime"></p>
+    </div>
+    <h1>某一天(10天后)：</h1>
+    <div class="box ">
+        <p id="oneDay"></p>
+    </div>
+    <script type="text/javascript">
+        window.onload = function () {
+            var format = function (num) {
+                return (num < 10 ? '0' + num : num);
+            }
+            var UseDate = function () { };
+            UseDate.prototype = {
+                oneDay: function (num) {
+                    var date = new Date();
+                    date.setDate(date.getDate() + num);
+
+                    var year = date.getFullYear(),
+                        month = format(date.getMonth() + 1),
+                        day = format(date.getDate());
+
+                    document.getElementById("oneDay").innerHTML = year + " 年 " + month + " 月 " + day + " 日 ";
+
+                },
+                limitedTime: function () {
+                    setTimeout(function () {
+                        var nowtime = new Date(),
+                            endtime = new Date('2020,6,6,12:00:00'),
+                            lefttime = (endtime.getTime() - nowtime.getTime()) / 1000,
+                            day = parseInt(lefttime / (60 * 60 * 24)),
+                            H = format(parseInt(lefttime / (60 * 60) % 24)),
+                            M = format(parseInt(lefttime / 60 % 60)),
+                            S = format(parseInt(lefttime % 60));
+
+                        if (lefttime > 0) {
+                            document.getElementById("limitedTime").innerHTML = '剩余  ' + day + '  天 ' + H + ' 时  ' + M + ' 分 ' + S + ' 秒 ';
+                        }
+                        else {
+                            document.getElementById('limitedTime').innerHTML = '限时抢已结束';
+                        }
+                        setTimeout(arguments.callee, 500);
+                    }, 500);
+
+                },
+                deadLine: function () {
+                    var nowdate = new Date();
+
+                    var deadline = new Date('2020,6,6'),
+                        lefttime = Math.ceil((deadline.getTime() - nowdate.getTime()) / (24 * 60 * 60 * 1000));
+
+                    if (lefttime > 0) {
+                        document.getElementById("deadLine").innerHTML = '剩余  ' + lefttime + '  天';
+                    }
+                    else {
+                        document.getElementById('deadLine').innerHTML = '倒计已结束';
+                    }
+                },
+                showTime: function () {
+                    setTimeout(function () {
+                        var date = new Date();
+
+                        var year = date.getFullYear(),
+                            month = format(date.getMonth() + 1),
+                            day = format(date.getDate()),
+                            week = date.getDay(),//星期
+                            H = format(date.getHours()),
+                            M = format(date.getMinutes()),
+                            S = format(date.getSeconds());
+
+                        //①用【Array构造函数】创建数组
+                        //var weeks = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+
+                        //②用【数组字面量】创建数组 
+                        var weeks = [" 星期日 ", " 星期一 ", " 星期二 ", " 星期三 ", " 星期四 ", " 星期五 ", " 星期六 "];
+                        // alert(date);
+                        document.getElementById("showTime").innerHTML = year + " 年 " + month + " 月 " + day + " 日 " + weeks[week] + H + " : " + M + " : " + S;
+                        setTimeout(arguments.callee,500);
+                    }, 500);
+                }
+            }
+            var a = new UseDate();
+            // setTimeout('a.showTime()',500);
+            a.showTime();
+            a.deadLine();
+            a.limitedTime();
+            a.oneDay(10);
+        }
+    </script>
+</body>
+
+</html>
