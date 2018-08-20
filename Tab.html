@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tab</title>
+    <style>
+        ul,
+        li {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+        }
+
+        a {
+            padding: 0px;
+            margin: 0px;
+            color: black;
+            text-decoration: none;
+
+        }
+
+        .Tabs {
+            height: 1000px;
+            /* background-color: grey; */
+            min-width: 350px;
+
+        }
+
+        .tab {
+            position:relative;
+            float: left;
+            margin: 100px 50px 0px 50px;
+            width: 296px;
+            /* background-color: aquamarine; */
+        }
+
+        .tab .tab_nav {
+            /* background-color: blue; */
+            height: 30px;
+        }
+        .tab .tab_nav li {
+            background-color: lightblue;
+            float: left;
+            padding: 4px 21px;
+        }
+        .tab .tab_nav li:hover,
+        .tab .tab_nav li.select {
+            background-color: lightskyblue;
+        }
+
+        .tab .tab_nav li:hover a,
+        .tab .tab_nav li.select a {
+            color: white;
+        }
+        .tab .IMG{
+            position:absolute;
+            right:0px;
+            bottom:0px;
+        }
+        .tab .IMG li {
+            /* background-color:blue; */
+            padding:0px 8px; 
+            border-radius: 50%; 
+        }
+
+        .content_warp {
+            background-color: blanchedalmond;
+            width: 296px;
+            height: 180px;
+            /* border:1px solid gray; */
+        }
+
+        .content_warp .content_item {
+            display: none;
+        }
+
+        .content_warp .current {
+            display: block;
+        }
+
+        .content_warp .content_item img {
+            width: 296px;
+            height: 180px;
+
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="Tabs">
+
+        <div id="tab" class="tab click">
+            <h3>直接切换:</h3>
+            <ul class="tab_nav" id="tab_nav">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">娱乐</a>
+                </li>
+                <li>
+                    <a href="#">电影</a>
+                </li>
+                <li class="select">
+                    <a href="#">科技</a>
+                </li>
+            </ul>
+            <div id="content_warp" class="content_warp">
+                <div class="content_item ">
+                    <img src="IMG/1.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/2.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/3.jpg" />
+                </div>
+                <div class="content_item current ">
+                    <img src="IMG/4.jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div id="tab" class="tab delay">
+            <h3>延迟切换:</h3>
+            <ul class="tab_nav" id="tab_nav_1">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">娱乐</a>
+                </li>
+                <li>
+                    <a href="#">电影</a>
+                </li>
+                <li class="select">
+                    <a href="#">科技</a>
+                </li>
+            </ul>
+            <div id="content_warp_1" class="content_warp">
+                <div class="content_item ">
+                    <img src="IMG/1.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/2.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/3.jpg" />
+                </div>
+                <div class="content_item current ">
+                    <img src="IMG/4.jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div id="tab" class="tab auto">
+            <h3>自动切换&手动切换:</h3>
+            <ul class="tab_nav" id="tab_nav_2">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">娱乐</a>
+                </li>
+                <li>
+                    <a href="#">电影</a>
+                </li>
+                <li class="select">
+                    <a href="#">科技</a>
+                </li>
+            </ul>
+            <div id="content_warp_2" class="content_warp">
+                <div class="content_item ">
+                    <img src="IMG/1.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/2.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/3.jpg" />
+                </div>
+                <div class="content_item current ">
+                    <img src="IMG/4.jpg" />
+                </div>
+            </div>
+        </div>
+        <div id="tab" class="tab auto">
+            <h3>图片轮播:</h3>
+            <ul class="tab_nav IMG" id="tab_nav_3">
+                <li>
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li class="select">
+                    <a href="#">4</a>
+                </li>
+            </ul>
+            <div id="content_warp_3" class="content_warp">
+                <div class="content_item ">
+                    <img src="IMG/1.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/2.jpg" />
+                </div>
+                <div class="content_item">
+                    <img src="IMG/3.jpg" />
+                </div>
+                <div class="content_item current ">
+                    <img src="IMG/4.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function get(id, tagName) {
+            return (document.getElementById(id).getElementsByTagName(tagName));
+        }
+        function getId(id){
+            return (document.getElementById(id));
+        }
+
+        var Tab = function () { };
+        Tab.prototype = {
+            switch: function (navId,itemId) {
+                var nav = get(navId, 'li'),
+                    item = get(itemId, 'div');
+                if (nav.length != item.length)
+                    return;
+                for (var i = 0; i < nav.length; i++) {
+                    nav[i].id = i;      //添加索引
+                    nav[i].onmouseover = function () {
+                        for (var j = 0; j < nav.length; j++) {
+                            nav[j].className = '';
+                            item[j].style.display = 'none';
+                        }
+                        nav[this.id].className = 'select';//点击的高亮
+                        item[this.id].style.display = 'block';//将对应的item显示
+                    }
+                }
+            },
+            delay: function (navId,itemId,time) {
+                var timer = null;
+                var nav = get(navId, 'li'),
+                    item = get(itemId, 'div');
+                if (nav.length != item.length)
+                    return;
+                for (var i = 0; i < nav.length; i++) {
+                    nav[i].id = i;      //添加索引
+                    nav[i].onmouseover = function () {
+                        var that = this;     // 用that这个变量来引用当前点击的li
+                        if (timer) {  // 如果存在准备执行的定时器，立刻清除，只有当前停留时间大于500ms时才开始执行
+                            clearTimeout(timer);
+                            timer = null;
+                        }
+                        timer = window.setTimeout(function () {     // 延迟半秒执行
+                            for (var j = 0; j < nav.length; j++) {
+                                nav[j].className = '';
+                                item[j].style.display = 'none';
+                            }
+                            nav[that.id].className = 'select';//点击的高亮
+                            item[that.id].style.display = 'block';//将对应的item显示
+                        }, time);
+                    }
+                }
+
+            },
+            auto: function (navId,itemId,time) {
+                var index = 0,
+                    timer = null;
+                var nav = get(navId, 'li'),
+                    item = get(itemId, 'div'),
+                    warp = getId(itemId);
+                for (var i = 0; i < nav.length; i++) {
+                    nav[i].id = i;      //添加索引
+                    nav[i].onmouseover = function () {
+                        clearInterval(timer);       //鼠标悬浮清除定时器
+                        changeOption(this.id);      //并对内容进行切换
+                    }
+                    nav[i].onmouseout = function () {
+                        timer = setInterval(autoPlay, time); //鼠标移开后继续自动切换
+                    }
+                }
+                if (timer) {// 如果存在准备执行的定时器
+                    clearInterval(timer);   //立刻清除，只有当前停留时间大于2000ms时才开始执行
+                    timer = null;
+                }
+                timer = setInterval(autoPlay, time);//自动切换
+                function autoPlay() {//自动切换函数
+                    index++;
+                    if (index >= nav.length) {   //当最后一个时，跳回第一个
+                        index = 0;
+                    }
+                    changeOption(index);
+                }
+                function changeOption(curIndex) {//内容切换函数
+                    for (var j = 0; j < nav.length; j++) {
+                        nav[j].className = '';
+                        item[j].style.display = 'none';
+                    }
+                    nav[curIndex].className = 'select';
+                    item[curIndex].style.display = 'block';
+                    index = curIndex;
+                }
+                warp.onmouseover = function () {
+                    clearInterval(timer);
+                };
+                warp.onmouseout = function () {
+                    timer = setInterval(autoPlay, time); //鼠标移开后继续自动切换
+                };
+            }
+        }
+
+
+        window.onload = function () {
+            var tab = new Tab();
+            tab.switch('tab_nav','content_warp');
+            tab.delay('tab_nav_1','content_warp_1',500);
+            tab.auto('tab_nav_2','content_warp_2',2000);
+            tab.auto('tab_nav_3','content_warp_3',2000);
+        }
+
+
+    </script>
+</body>
+
+</html>
