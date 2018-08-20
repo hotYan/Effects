@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <style>
+        .wrap {
+            margin: 150px auto;
+            /* background-color: beige; */
+            border: 2px solid black;
+            width: 400px;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+
+
+        }
+
+        .wrap:hover .arrow {
+            display: block;
+        }
+
+        .content {
+            height: 250px;
+            width: 2800px;
+            position: absolute;
+            z-index: 1;
+
+
+        }
+
+        .content img {
+            width: 400px;
+            height: 250px;
+            float: left;
+
+        }
+
+        .dot {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            z-index: 2;
+            /* background-color: brown; */
+        }
+
+        .dot span {
+            display: inline-block;
+            background-color: lightcyan;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            /* padding:5px; */
+
+
+        }
+
+        .dot span.on {
+            background-color: aqua;
+
+        }
+
+        .arrow {
+            /* text-align: center; */
+
+            display: none;
+            position: absolute;
+            top: 110px;
+            padding: 5px;
+            z-index: 2;
+            background-color: lightcyan;
+        }
+
+        .arrow:hover {
+            background-color: aqua;
+            color: white;
+        }
+
+        #prev {
+            left: 1px;
+        }
+
+        #next {
+            right: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <div class="content" id="content" style="left:-400px;">
+            <img src="IMG/5.jpg" alt="1" />
+            <img src="IMG/1.jpg" alt="1" />
+            <img src="IMG/2.jpg" alt="2" />
+            <img src="IMG/3.jpg" alt="3" />
+            <img src="IMG/4.jpg" alt="4" />
+            <img src="IMG/5.jpg" alt="5" />
+            <img src="IMG/1.jpg" alt="5" />
+        </div>
+        <div class="dot" id="dot">
+            <span class="on"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a id="prev" class="arrow">&lt;</a>
+        <a id="next" class="arrow">&gt;</a>
+
+    </div>
+
+    <script type="text/javascript">
+        function getId(id) {
+            return (document.getElementById(id))
+        }
+
+        window.onload = function () {
+            var index = 0,
+                interval = 3000;
+            var timer;
+            var wrap = getId('wrap'),
+                content = getId('content'),
+                dots = document.getElementById('dot').getElementsByTagName('span'),
+                prev = getId('prev'),
+                next = getId('next');
+
+            function showDot(curIndex) {//显示圆点高亮
+                for (var i = 0; i < dots.length; i++) {
+                    if (dots[i].className == 'on') {
+                        dots[i].className = '';
+                        break;
+                    }
+                }
+                dots[curIndex].className = 'on';
+            }
+            function animate(num) {//图片切换，无限滚动
+                var time = 300,
+                    interval = 10,
+                    speed = num / (time / interval);
+                var newLeft = parseInt(content.style.left) + num;
+                function go() {//缓慢切换，添加
+                    if ((speed < 0 && parseInt(content.style.left) > newLeft) || (speed > 0 && parseInt(content.style.left) < newLeft)) {
+                        content.style.left = parseInt(content.style.left) + speed + 'px';
+                        setTimeout(go, interval);
+                    }
+                    else {
+                        content.style.left = newLeft + 'px';
+                        if (newLeft > - 400) {//如果移到假的第5张图
+                            content.style.left = -2000 + 'px';//定位到真的第五张图
+                        }
+                        if (newLeft < -2000) {//如果移到假的第1张图
+                            content.style.left = -400 + 'px';//定位到真的第一张图
+                        }
+                    }
+                }
+                go();
+            }
+            function play() {    //自动切换函数}
+                next.onclick();
+            }
+            wrap.onmouseover = function () {//鼠标悬浮，清除定时器
+                clearInterval(timer);
+            };
+            wrap.onmouseout = function () {
+                timer = setInterval(play, interval);
+            };
+            ///////自动切换/////////
+            timer = setInterval(play, interval);
+            /////////使用左右按钮切换/////////////
+            next.onclick = function () {//向右切换
+                if (index == 4) {//圆点最后一个跳转到第一个
+                    index = 0;
+                } else {
+                    index += 1;//向右移动
+                }
+                animate(-400);
+                // console.log(index);
+                showDot(index);
+
+            }
+            prev.onclick = function () {//向左切换
+                if (index == 0) {//圆点第一个跳转到最后一个
+                    index = 4;
+                } else {
+                    index -= 1;//向左移动
+                }
+                animate(400);
+                showDot(index);
+                // console.log(content.style.left);
+            }
+            ///////使用圆点切换///////////
+            for (var i = 0; i < dots.length; i++) {//使用圆点切换
+                dots[i].id = i;
+                dots[i].onclick = function () {
+                    if (this.className == 'on') {
+                        return;
+                    }
+                    var num = -400 * (this.id - index);
+                    animate(num);       //点击圆点图片切换
+                    index = Number(this.id);
+                    showDot(index);     //当前圆点高亮显示
+
+
+                }
+
+            }
+
+
+
+        }
+    </script>
+</body>
+
+</html>
